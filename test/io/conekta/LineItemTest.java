@@ -12,6 +12,7 @@ public class LineItemTest extends ConektaBase{
     JSONObject validOrder;
 
     public LineItemTest() throws JSONException {
+        setApiVersion("2.0.0");
         validOrder = new JSONObject(
             "{ 'currency': 'mxn'," +
             "  'metadata': {" +

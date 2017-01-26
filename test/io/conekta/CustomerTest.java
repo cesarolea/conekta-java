@@ -155,21 +155,19 @@ public class CustomerTest extends ConektaBase {
     }
 
     // @Test
-    public void testSuccessfulFiscalEntityCreate() throws JSONException, Error, ErrorList {
-        setApiVersion("1.1.0");
+    public void testSuccessfulFiscalEntityCreate() throws JSONException, Error, ErrorList, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
+        setApiVersion("2.0.0");
         JSONObject fiscalEntityParams = new JSONObject("{" +
         "    'tax_id': 'AMGH851205MN1'," +
-        "    'company_name': 'Nike SA de CV'," +
-        "    'email': 'contacto@nike.mx'," +
-        "    'phone': '+5213353319758'," +
+        "    'name': 'Nike SA de CV'," +
         "    'address': {" +
         "        'street1': '250 Alexis St'," +
-        "        'internal_number': 19," +
-        "        'external_number': 91," +
+        "        'internal_number': '19'," +
+        "        'external_number': '91'," +
         "        'city': 'Red Deer'," +
         "        'state': 'Alberta'," +
         "        'country': 'MX'," +
-        "        'zip': '78215'" +
+        "        'postal_code': '78215'" +
         "    }" +
         "}");
 
@@ -182,23 +180,21 @@ public class CustomerTest extends ConektaBase {
     }
 
     // @Test
-    public void testSuccessfulShippingContactCreate() throws JSONException, Error, ErrorList {
-        setApiVersion("1.1.0");
+    public void testSuccessfulShippingContactCreate() throws JSONException, Error, ErrorList, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
+        setApiVersion("2.0.0");
         JSONObject shippingContactParams = new JSONObject("{"+
         "    'email': 'thomas.logan@xmen.org'," +
         "    'phone': '+5213353319758'," +
         "    'receiver': 'Marvin Fuller'," +
-        "    'between_streets': {" +
-        "        'street1': 'Ackerman Crescent'," +
-        "    }," +
+        "    'between_streets': 'Ackerman Crescent'," +
         "    'address': {" +
         "        'street1': '250 Alexis St'," +
-        "        'internal_number': 19," +
-        "        'external_number': 91," +
+        "        'internal_number': '19'," +
+        "        'external_number': '91'," +
         "        'city': 'Red Deer'," +
         "        'state': 'Alberta'," +
         "        'country': 'MX'," +
-        "        'zip': '78215'" +
+        "        'postal_code': '78215'" +
         "    }" +
         "}");
 
@@ -209,8 +205,8 @@ public class CustomerTest extends ConektaBase {
         assertTrue(((ShippingContact) customer.shipping_contacts.get(0)) instanceof ShippingContact);
     }
 
-    public void testSuccessfulSourceCreate() throws JSONException, Error, ErrorList {
-        setApiVersion("1.1.0");
+    public void testSuccessfulSourceCreate() throws JSONException, Error, ErrorList, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
+        setApiVersion("2.0.0");
         JSONObject sourceParams = new JSONObject("{" +
         "    'token_id': 'tok_test_visa_4242'," +
         "    'type': 'card'" +
@@ -218,9 +214,9 @@ public class CustomerTest extends ConektaBase {
 
         Customer customer = Customer.create(valid_visa_card);
 
-        Source source = customer.createSource(sourceParams);
+        PaymentSource source = customer.createSource(sourceParams);
 
-        assertTrue(source instanceof Source);
-        assertTrue(customer.sources.size() == 1);
+        assertTrue(source instanceof PaymentSource);
+        assertTrue(customer.payment_sources.size() == 1);
     }
 }
